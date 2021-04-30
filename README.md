@@ -1,0 +1,1 @@
+Grabbing a published (geo)json file from ORTE Backend, plus all referenced images
