@@ -11,7 +11,7 @@ task :grab, [:map_id,:layer_id] do |task, args|
 
   # create dump folder, if not exists
   time = Time.now.strftime("%Y-%m-%d-%H-%M")
-  dirname = "dump-#{time}"
+  dirname = "dump-map-#{args[:map_id]}-layer-#{args[:layer_id]}--#{time}"
   FileUtils.mkdir_p dirname
 
 
@@ -39,6 +39,8 @@ task :grab, [:map_id,:layer_id] do |task, args|
       result.features.each do |f|
         imgs = f.properties.images
         imgs.each do |i|
+
+          next unless i.image_url
 
           # i.image_url is an active storage representation url, redirects
 
