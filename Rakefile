@@ -29,6 +29,13 @@ task :grab, [:map_id,:layer_id] do |task, args|
     if response.code == "200"
       result = JSON.parse(response.body, object_class: OpenStruct)
       puts "Layer #{result.title} with #{result.features.count} features"
+
+      open dirname+"/#{args[:layer_id]}.geojson", 'w' do |file|
+        file.write(response.body)
+      end
+      puts "GeoJSON file #{counter} downloaded: /#{args[:layer_id]}.geojson"
+
+      # iterate through all features
       result.features.each do |f|
         imgs = f.properties.images
         imgs.each do |i|
